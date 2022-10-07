@@ -1,9 +1,9 @@
-<p>{{planets}}</p>
-<div id="test-div"></div>
 <script src={{url_for('static', filename='astrochart.min.js')}}></script>
 <script>
    
-    
+    // TODO the data will need to be refetched every X seconds with recursive fetch function
+    // we may not need the backend app at all in this case since fe can fetch from itself
+    // would be nice to put it all into a file and import it properly 
 	window.onload = function(){	
         const planets_url = {{ url_for("current")|tojson }}
     fetch(planets_url)
