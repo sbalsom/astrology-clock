@@ -1,0 +1,42 @@
+<p>{{planets}}</p>
+<div id="test-div"></div>
+<script src={{url_for('static', filename='astrochart.min.js')}}></script>
+<script>
+   
+    
+	window.onload = function(){	
+        const planets_url = {{ url_for("current")|tojson }}
+    fetch(planets_url)
+    .then((response) => response.json())
+    .then((json)=> {
+            console.log(json)
+
+            var planets = {
+            "planets": {
+                "Jupiter":[json["jupiter"]],
+                "Mars":[json["mars"]],
+                "Mercury":[json["mercury"]],
+                "Moon":[json["moon"]],
+                "Saturn":[json["saturn"]],
+                "Sun":[json["sun"]],
+                "Venus":[json["venus"]]
+            },
+            // cusps[0] = Asc
+            // cusps[3] = Ic
+            // cusps[6] = Mc
+            // cusps[9] = Ds
+            // so it only supports Placidus house system, which is fine for now 
+            "cusps":[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
+
+            }
+
+
+            var settings = {POINTS_TEXT_SIZE: 12}
+            var chart = new astrology.Chart( 'paper', 800, 800, settings);
+            radix = chart.radix( planets );	
+            radix.drawAxis() 
+            radix.drawUniverse()	
+        })
+	
+	};			
+</script>

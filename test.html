@@ -1,0 +1,29 @@
+
+<script src="static/astrochart.min.js"></script>
+<script>
+    var planets = {
+        "planets": {
+            "Jupiter":	[2.683309785935811],
+            "Mars":	[81.20405250149607],
+            "Mercury":	[174.55734334016248],
+            "Moon":	[299.7980873644851],
+            "Saturn":	[318.88126003236016],
+            "Sun":	[191.1654890956022],
+            "Venus":	[186.35139313615505],
+        },
+        // cusps[0] = Asc
+        // cusps[3] = Ic
+        // cusps[6] = Mc
+        // cusps[9] = Ds
+        // so it only supports Placidus house system, which is fine for now 
+        "cusps":[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
+
+    }
+	window.onload = function(){	
+        // var settings = {};
+		var chart = new astrology.Chart( 'paper', 800, 800);
+		radix = chart.radix( planets );	
+        radix.drawAxis () 
+        radix.drawUniverse()		
+	};			
+</script>
